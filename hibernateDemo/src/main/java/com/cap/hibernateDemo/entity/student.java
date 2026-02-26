@@ -1,9 +1,12 @@
 package com.cap.hibernateDemo.entity;
-
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "student")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class student {
 
     @Id

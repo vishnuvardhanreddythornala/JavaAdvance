@@ -18,7 +18,7 @@ public class OneToOne {
     public static void main(String[] args) {
 
         Configuration cfg = new Configuration();
-        cfg.configure("hibernate.cfg.xml");
+        cfg.configure("hibernateOneToOne.cfg.xml");
         cfg.addAnnotatedClass(Person.class);
         cfg.addAnnotatedClass(Passport.class);
 

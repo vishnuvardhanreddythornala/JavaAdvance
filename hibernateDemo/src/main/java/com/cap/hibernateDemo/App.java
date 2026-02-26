@@ -27,6 +27,7 @@ public class App {
         		System.out.println("2. Read Student");
         		System.out.println("3. Update Student");
         		System.out.println("4. Delete Student");
+        		System.out.println("5. Cache Demo");   //new
         		System.out.println("5. Exit");
         		
         		choice  = sc.nextInt();
@@ -72,15 +73,22 @@ public class App {
                      deleteStudentById(factory, deleteId);
                      break;
 
-                 case 5:
-                     System.out.println("Exiting application...");
-                     break;
+        		case 5:
+        		    System.out.print("Enter Student Id for Cache Demo: ");
+        		    int cacheId = sc.nextInt();
+        		    cacheDemo(factory, cacheId);
+        		    break;
+
+        		case 6:
+        		    System.out.println("Exiting application...");
+        		    break;
+
 
                  default:
                      System.out.println("Invalid choice!");
         			
         		}
-        	}while (choice != 5);
+        	}while (choice != 6);
         } finally {
             sc.close();
             factory.close();
@@ -170,6 +178,34 @@ public class App {
             session.close();
         }
     }
+    
+    //cacheDemo method
+    private static void cacheDemo(SessionFactory factory, int id) {
+
+        System.out.println("\n--- FIRST FETCH (DB HIT) ---");
+        Session s1 = factory.openSession();
+        student st1 = s1.get(student.class, id);
+
+        if (st1 != null)
+            System.out.println("Student Name: " + st1.getName());
+        else
+            System.out.println("Student not found");
+
+        s1.close();
+
+        System.out.println("\n--- SECOND FETCH (CACHE HIT) ---");
+        Session s2 = factory.openSession();
+        student st2 = s2.get(student.class, id);
+
+        if (st2 != null)
+            System.out.println("Student Name: " + st2.getName());
+        else
+            System.out.println("Student not found");
+
+        s2.close();
+    }
+
+    
 
 
 

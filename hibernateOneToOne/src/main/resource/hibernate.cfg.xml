@@ -27,8 +27,8 @@
         <property name="hibernate.format_sql">true</property>
 		
         <!-- Entity Mapping -->
-        <mapping class="com.cap.entity.Person"/>
-        <mapping class="com.cap.entity.Passport"/>
+        <mapping class="com.cap.entity.Student"/>
+        <mapping class="com.cap.entity.Course"/>
         
     </session-factory>
 </hibernate-configuration>
