@@ -20,7 +20,7 @@
             <td>${user.name}</td>
             <td>${user.email}</td>
             <td>
-                <a href="${pageContext.request.contextPath}/user/${user.id}">
+                <a href="${pageContext.request.contextPath}/users/${user.id}">
                     View
                 </a>
             </td>
