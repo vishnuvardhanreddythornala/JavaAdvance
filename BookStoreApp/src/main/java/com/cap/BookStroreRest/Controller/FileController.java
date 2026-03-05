@@ -36,7 +36,8 @@ public class FileController {
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(fileEntity.getFileType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+ fileEntity.getFileName()+"\"" )
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "inline; filename=\"" + fileEntity.getFileName() + "\"")
                 .contentLength(fileEntity.getFileSize())
                 .body(resource);
     }
