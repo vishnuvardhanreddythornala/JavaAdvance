@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -58,13 +59,20 @@ public class BookService {
 
         return modelMapper.map(book, BookDto.class);
     }
+    @Cacheable(value = "books", key = "'allBooks'")
+
     public List<BookDto> getAllBooks(){
+        System.out.println("DB CALL HAPPENING!!!");
         List<Book> bookList =  bookRepository.findAll();
         return bookList.stream()
                 .map(book -> modelMapper.map(book, BookDto.class))
                 .toList();
     }
+
+//    @Cacheable(value = "books", key = "#page + '_' + #size + '_' + #sortBy + '_' + #direction")
     public PageResponse<BookDto>  getBooks(int page, int size, String sortBy, String direction){
+
+
         Sort sort = direction.equalsIgnoreCase("desc")
                 ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
         Pageable pageable = PageRequest.of(page,size,sort);
