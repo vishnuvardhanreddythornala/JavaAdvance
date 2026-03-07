@@ -1,6 +1,7 @@
 package com.cap.BookStroreRest.Service;
 
 import com.cap.BookStroreRest.DataTransferObject.LoginRequest;
+import com.cap.BookStroreRest.DataTransferObject.LoginResponse;
 import com.cap.BookStroreRest.DataTransferObject.UserDto;
 import com.cap.BookStroreRest.DataTransferObject.UserPageResponse;
 
@@ -10,7 +11,7 @@ public interface UserService {
 
     UserDto registerUser(UserDto userDto);
 
-    String loginUser(LoginRequest loginRequest);
+    LoginResponse loginUser(LoginRequest loginRequest);
 
     List<UserDto> getAllUsers();
 

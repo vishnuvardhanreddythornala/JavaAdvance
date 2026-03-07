@@ -1,6 +1,7 @@
 package com.cap.BookStroreRest.Controller;
 
 import com.cap.BookStroreRest.DataTransferObject.LoginRequest;
+import com.cap.BookStroreRest.DataTransferObject.LoginResponse;
 import com.cap.BookStroreRest.DataTransferObject.UserDto;
 import com.cap.BookStroreRest.DataTransferObject.UserPageResponse;
 import com.cap.BookStroreRest.Service.UserService;
@@ -24,7 +25,7 @@ public class UserController {
 
     //Login User
     @PostMapping("/login")
-    public String loginUser(@RequestBody LoginRequest loginRequest){
+    public LoginResponse loginUser(@RequestBody LoginRequest loginRequest){
         return userService.loginUser(loginRequest);
     }
 

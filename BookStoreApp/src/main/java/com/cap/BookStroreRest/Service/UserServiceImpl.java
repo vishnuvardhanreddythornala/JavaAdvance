@@ -1,6 +1,7 @@
 package com.cap.BookStroreRest.Service;
 
 import com.cap.BookStroreRest.DataTransferObject.LoginRequest;
+import com.cap.BookStroreRest.DataTransferObject.LoginResponse;
 import com.cap.BookStroreRest.DataTransferObject.UserDto;
 import com.cap.BookStroreRest.Entity.User;
 import com.cap.BookStroreRest.Repository.UserRepository;
@@ -32,16 +33,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String loginUser(LoginRequest loginRequest) {
+    public LoginResponse loginUser(LoginRequest loginRequest) {
 
         User user = userRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if(user.getPassword().equals(loginRequest.getPassword())){
-            return "Login Successful";
+        if (!user.getPassword().equals(loginRequest.getPassword())) {
+            throw new RuntimeException("Invalid Credentials");
         }
 
-        return "Invalid Credentials";
+        LoginResponse response = new LoginResponse();
+
+        response.setEmail(user.getEmail());
+        response.setPassword(user.getPassword());
+
+        // Dummy tokens (for now)
+        response.setAccessToken("access-token-12345");
+        response.setRefreshToken("refresh-token-67890");
+
+        return response;
     }
 
     @Override
