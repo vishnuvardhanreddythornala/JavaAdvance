@@ -14,22 +14,26 @@ import java.util.stream.Collectors;
 @Service
 public class BookService {
     private final BookRepository bookRepository;
-    private  final ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
     public BookService(BookRepository bookRepository, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public BookResponse  addBook(BookRequest request){
-        Book book  =  modelMapper.map(request, Book.class);
+    public BookResponse addBook(BookRequest request){
+        Book book = modelMapper.map(request, Book.class);
         Book saved = bookRepository.save(book);
         return modelMapper.map(saved, BookResponse.class);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteBook(Long id){
-        bookRepository.deleteById(id);
+    public void deleteBook(long id){
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Book not found"));
+
+        bookRepository.delete(book);
     }
 
     public List<BookResponse> getAllBooks(){
