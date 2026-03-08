@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Details</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Book Details</h2>
+
+    <p><b>ID:</b> <span th:text="${book.id}"></span></p>
+    <p><b>Title:</b> <span th:text="${book.title}"></span></p>
+    <p><b>Author:</b> <span th:text="${book.author}"></span></p>
+    <p><b>Price:</b> <span th:text="${book.price}"></span></p>
+
+    <a th:href="@{/books/view}">Back</a>
+</div>
+</body>
+</html>

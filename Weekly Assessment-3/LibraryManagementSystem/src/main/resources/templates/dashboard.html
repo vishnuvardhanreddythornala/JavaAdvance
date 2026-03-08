@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Library Dashboard</h2>
+
+    <a th:href="@{/books/add}">Add Book</a> |
+    <a th:href="@{/books/view}">View Books</a> |
+    <a th:href="@{/login}">Logout</a>
+</div>
+</body>
+</html>
