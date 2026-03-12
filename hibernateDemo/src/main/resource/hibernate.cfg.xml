@@ -25,9 +25,16 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
+<<<<<<< HEAD
 		
         <!-- Entity Mapping -->
         <mapping class="com.cap.hibernateDemo.entity.student"/>
         
+=======
+
+        <!-- Entity Mapping -->
+        <mapping class="com.cap.hibernateDemo.entity.student"/>
+
+>>>>>>> c0c9dcb9e4b2268da5804e24bb63b95c50d18b9f
     </session-factory>
 </hibernate-configuration>

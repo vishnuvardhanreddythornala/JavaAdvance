@@ -39,6 +39,7 @@
             <artifactId>hibernate-core</artifactId>
             <version>6.4.4.Final</version>
         </dependency>
+<<<<<<< HEAD
         
          <!-- Hibernate JCache integration  -->
 	    <dependency>
@@ -78,6 +79,8 @@
 	        </exclusion>
 	    </exclusions>
 	</dependency>
+=======
+>>>>>>> c0c9dcb9e4b2268da5804e24bb63b95c50d18b9f
 
         <!-- Jakarta Persistence API -->
         <dependency>

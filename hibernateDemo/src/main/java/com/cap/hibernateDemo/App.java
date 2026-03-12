@@ -27,7 +27,10 @@ public class App {
         		System.out.println("2. Read Student");
         		System.out.println("3. Update Student");
         		System.out.println("4. Delete Student");
+<<<<<<< HEAD
         		System.out.println("5. Cache Demo");   //new
+=======
+>>>>>>> c0c9dcb9e4b2268da5804e24bb63b95c50d18b9f
         		System.out.println("5. Exit");
         		
         		choice  = sc.nextInt();
@@ -73,6 +76,7 @@ public class App {
                      deleteStudentById(factory, deleteId);
                      break;
 
+<<<<<<< HEAD
         		case 5:
         		    System.out.print("Enter Student Id for Cache Demo: ");
         		    int cacheId = sc.nextInt();
@@ -83,12 +87,21 @@ public class App {
         		    System.out.println("Exiting application...");
         		    break;
 
+=======
+                 case 5:
+                     System.out.println("Exiting application...");
+                     break;
+>>>>>>> c0c9dcb9e4b2268da5804e24bb63b95c50d18b9f
 
                  default:
                      System.out.println("Invalid choice!");
         			
         		}
+<<<<<<< HEAD
         	}while (choice != 6);
+=======
+        	}while (choice != 5);
+>>>>>>> c0c9dcb9e4b2268da5804e24bb63b95c50d18b9f
         } finally {
             sc.close();
             factory.close();
@@ -178,6 +191,7 @@ public class App {
             session.close();
         }
     }
+<<<<<<< HEAD
     
     //cacheDemo method
     private static void cacheDemo(SessionFactory factory, int id) {
@@ -206,6 +220,8 @@ public class App {
     }
 
     
+=======
+>>>>>>> c0c9dcb9e4b2268da5804e24bb63b95c50d18b9f
 
 
 
