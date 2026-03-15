@@ -1,0 +1,26 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${CONFIG_GIT_URI:https://github.com/your-org/educommerce-config}
+          default-label: main
+          search-paths: configs
+          clone-on-start: false
+        # Fallback to native (local) profile for development
+        native:
+          search-locations: classpath:/configs
+
+  profiles:
+    active: native   # Switch to 'git' in production
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh
