@@ -1,0 +1,101 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: student-service-auth
+          uri: lb://student-service
+          predicates:
+            - Path=/auth/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: studentCircuitBreaker
+                fallbackUri: forward:/fallback/student
+
+        - id: student-service
+          uri: lb://student-service
+          predicates:
+            - Path=/students/**, /courses/**, /enroll/**
+          filters:
+            - JwtAuthFilter
+            - name: CircuitBreaker
+              args:
+                name: studentCircuitBreaker
+                fallbackUri: forward:/fallback/student
+
+        - id: attendance-service
+          uri: lb://attendance-service
+          predicates:
+            - Path=/attendance/**
+          filters:
+            - JwtAuthFilter
+            - name: CircuitBreaker
+              args:
+                name: attendanceCircuitBreaker
+                fallbackUri: forward:/fallback/attendance
+
+        - id: result-service
+          uri: lb://result-service
+          predicates:
+            - Path=/results/**
+          filters:
+            - JwtAuthFilter
+            - name: CircuitBreaker
+              args:
+                name: resultCircuitBreaker
+                fallbackUri: forward:/fallback/result
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+  instance:
+    prefer-ip-address: true
+
+jwt:
+  secret: ${JWT_SECRET:educommerce-super-secret-key-for-jwt-signing-2024}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_URL:http://localhost:9411}/api/v2/spans
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      studentCircuitBreaker:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+      attendanceCircuitBreaker:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+      resultCircuitBreaker:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
