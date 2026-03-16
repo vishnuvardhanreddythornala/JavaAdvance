@@ -1,0 +1,31 @@
+package com.cap.DOCTOR_SERVICE.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class DoctorResponseDTO {
+    @NotBlank
+    private Long doctorId;
+
+    @NotBlank
+    private String name;
+
+    @NotBlank
+    private String specialization;
+
+    @NotBlank
+    private String hospitalName;
+
+    @NotBlank
+    @Positive
+    private int experience;
+
+    @NotBlank
+    private String availability;
+}

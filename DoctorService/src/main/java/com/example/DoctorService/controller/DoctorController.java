@@ -30,4 +30,8 @@ public class DoctorController {
     public String userFallback(Throwable ex){
         return "User Service is currently unavailable. Showing cached doctor data";
     }
+    @GetMapping("/doctors/config")
+    public String getConfig(@Value("${doctor.service.message}") String message, @Value("${db.password}") String dbPass){
+        return message +" | DB: "+ dbPass;
+    }
 }
